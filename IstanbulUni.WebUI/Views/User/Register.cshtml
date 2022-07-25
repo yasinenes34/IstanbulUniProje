@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
+}
+<link href="~/Content/toastr.css" rel="stylesheet" />
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+<div class="card">
+    <div class="card-body register-card-body">
+        <p class="login-box-msg">Kayıt olma sayfasına hoş geldiniz</p>
+
+        <form id="ticketsForm">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="name" required placeholder="Adınız">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="surname" required placeholder="Soy Adınız">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                    </div>
+                </div>
+            </div> <div class="input-group mb-3">
+                <input type="tel" class="form-control" id="phone" required placeholder="Telefon numaranız">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-phone"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input type="email" class="form-control" required placeholder="Email" id="Email">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" required placeholder="Password" id="password">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" required placeholder="Retype password" id="repassword">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-12">
+                    <a id="register" class="btn btn-primary btn-block">Register</a>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+        <a href="~/User/Index" class="text-center">Zaten bir üyeliğiniz var mı?</a>
+    </div>
+    <!-- /.form-box -->
+</div><!-- /.card -->
+<script src="~/Scripts/kendo/2021.2.616/jquery.min.js"></script>
+
+<script src="~/Scripts/kendo/2021.2.616/kendo.all.min.js"></script>
+<script src="~/Scripts/kendo/2021.2.616/kendo.aspnetmvc.min.js"></script>
+
+<script src="~/Content/Main/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/toastr.js"></script>
+<script src="~/Scripts/toastr.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var validator = $("#ticketsForm").kendoValidator().data("kendoValidator");
+
+
+        $("#register").click(function () {
+
+            var data = new Object();
+
+            var Email = $('#UserName').val();
+
+            var password = $('#password').val();
+            var repassword = $('#repassword').val();
+
+            if (password == repassword || Email != "") {
+                data.Email = $('#Email').val();
+                data.Password = $('#password').val();
+                data.Name = $('#name').val();
+                data.Surname = $('#surname').val();
+                data.Phone = $('#phone').val();
+                $.ajax({
+                    type: "POST",
+                    url: '/User/Register',
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            toastr.success("Giriş Sayfasına yönlendiriliyorsunuz Lütfen bekleyin..", "Kayıt Olma İşlemi Başarılı", { timeOut: 3000 })
+                            window.location.href = "/User/Index";
+                        }
+                        else {
+                            toastr.error("Lütfen Bilgilerinizi Kontrol Ediniz...", "Başarısız", { timeOut: 3000 })
+                        }
+                    },
+                    error: function Error() {
+                        toastr.warning("Lütfen Bilgilerinizi Kontrol Ediniz...", "Başarısız", { timeOut: 3000 })
+                    }
+
+                });
+
+            }
+            else {
+                validationSummary.html("<div class='k-messagebox k-messagebox-error'>Kayıt Olma İşlemi Başarısız Lütfen Bilgilerinizi Kontrol Ediniz</div>");
+            }
+        });
+
+    });
+
+
+</script>

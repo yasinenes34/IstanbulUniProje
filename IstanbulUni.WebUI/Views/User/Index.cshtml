@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
+}
+
+<link href="~/Content/kendo/2021.2.616/kendo.common.min.css" rel="stylesheet" />
+
+<link href="~/Content/kendo/2021.2.616/kendo.default.min.css" rel="stylesheet" />
+
+<link href="~/Content/kendo/2021.2.616/kendo.default.mobile.min.css" rel="stylesheet" />
+<script src="~/Scripts/kendo/2021.2.616/jquery.min.js"></script>
+
+<script src="~/Scripts/kendo/2021.2.616/kendo.all.min.js"></script>
+<script src="~/Scripts/kendo/2021.2.616/kendo.aspnetmvc.min.js"></script>
+<link href="~/Content/toastr.css" rel="stylesheet" />
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+<div class="card">
+    <div class="card-body login-card-body">
+        <p class="login-box-msg">Giriş Yapınız</p>
+
+        <form>
+
+            <div class="input-group mb-3">
+                <input type="email" class="form-control" placeholder="Email" id="Email">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Password" id="Password">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <!-- /.col -->
+                <div class="col-12">
+                    <a id="login" class="btn btn-primary btn-block">Giriş Yap</a>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+        <p class="mb-0">
+            <a href="~/User/Register" class="text-center">Üyeliğiniz yok mu hemen üye olun</a>
+        </p>
+    </div>
+    <!-- /.login-card-body -->
+</div>
+
+<script src="~/Content/Main/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/toastr.js"></script>
+<script src="~/Scripts/toastr.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var validator = $("#ticketsForm").kendoValidator().data("kendoValidator");
+        $("#login").click(function () {
+
+            var data = new Object();
+            data.Email = $('#Email').val();
+            data.Password = $('#Password').val();
+            debugger
+            $.ajax({
+                type: "POST",
+                url: '/User/Index',
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    if (data) {
+                        toastr.success("Lütfen Bekleyin Yönlendiriliyorsunuz..", "Giriş İşlemi Başarılı", { timeOut: 3000 })
+                        window.location.href = "/WebMaster/Index";
+                    }
+                    else {
+                        toastr.error("Lütfen Bilgilerinizi Kontrol Ediniz...", "Başarısız", { timeOut: 3000 })
+
+                    }
+                },
+                error: function Error() {
+                    toastr.warning("Beklenmedik Bir Hata Meydana Geldi", "Hata", { timeOut: 3000 })
+                }
+            });
+        });
+    });
+
+
+</script>

@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<IstanbulUni.DAL.Model.User>
+
+
+<script src="~/Scripts/kendo/2021.2.616/jquery.min.js"></script>
+
+<script src="~/Scripts/kendo/2021.2.616/kendo.all.min.js"></script>
+<script src="~/Scripts/kendo/2021.2.616/kendo.aspnetmvc.min.js"></script>
+<div class="demo-section wide">
+    @*@(Html.Kendo().Chart<IstanbulUni.DAL.Model.WebMaster>()
+            .Name("chart")
+            .Title("Spain electricity production (GWh)")
+            .Legend(legend => legend
+                .Position(ChartLegendPosition.Top)
+            )
+            .DataSource(ds => ds.Read(read => read.Action("Read_Chart", "Home")))
+            .Series(series => {
+                series.Line(model => model.DomainName).Name("DomainName").CategoryField("Year");
+            })
+            .CategoryAxis(axis => axis
+                .Labels(labels => labels.Rotation(-90))
+                .Crosshair(c => c.Visible(true))
+            )
+            .ValueAxis(axis => axis.Numeric()
+                .Labels(labels => labels.Format("{0:N0}"))
+                .MajorUnit(10000)
+            )
+            .Tooltip(tooltip => tooltip
+                .Visible(true)
+                .Shared(true)
+                .Format("{0:N0}")
+            )
+        )*@
+    @(Html.Kendo().Chart<IstanbulUni.DAL.Model.WebMaster>()
+        .Name("chart")
+        .Title("Spain electricity production (GWh)")
+        .Legend(legend => legend
+            .Position(ChartLegendPosition.Top)
+        )
+        .DataSource(ds => ds.Read(read => read.Action("Read_Chart", "Home")))
+        .Series(series => {
+            series.Line(model => model.DomainName).Name("DomainName").CategoryField("Year");
+            series.Line(model => model.Name).Name("Name").CategoryField("Year");
+        })
+        .CategoryAxis(axis => axis
+            .Labels(labels => labels.Rotation(-90))
+            .Crosshair(c => c.Visible(true))
+        )
+        .ValueAxis(axis => axis.Numeric()
+            .Labels(labels => labels.Format("{0:N0}"))
+            .MajorUnit(10000)
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Shared(true)
+            .Format("{0:N0}")
+        )
+    )
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- Box Comment -->
+        <div class="card card-widget">
+            <div class="card-footer card-comments">
+                @foreach (var item in Model)
+                {
+                    <br />
+                    <img class="img-circle img-sm" src="~/Content/Main/dist/img/user1-128x128.jpg" alt="User Image">
+                    <div class="card-comment">
+                        <div class="comment-text">
+                            <span class="username">
+                                İsim: @item.Name Soy isim: @item.Surname
+                                <span class="text-muted float-right">@item.lastActivity</span>
+                            </span><!-- /.username -->
+                        </div>
+                        <!-- /.comment-text -->
+                    </div>
+                    <br />
+                }
+
+            </div>
+        </div>
+
+    </div>
+</div>
