@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace IstanbulUni.WebUI.Controllers
 {
@@ -25,8 +26,8 @@ namespace IstanbulUni.WebUI.Controllers
 
             if (userInfo)
             {
-                //FormsAuthentication.SetAuthCookie(user.UserName, false);
-                //Session["UserName"] = user.UserName;
+                FormsAuthentication.SetAuthCookie(user.Email, false);
+                Session["Email"] = user.Email;
 
 
                 return Json(true, JsonRequestBehavior.AllowGet);
@@ -43,7 +44,7 @@ namespace IstanbulUni.WebUI.Controllers
         public ActionResult Logout()
         {
             Session.RemoveAll();
-            //FormsAuthentication.SignOut();
+            FormsAuthentication.SignOut();
 
             return RedirectToAction("Index", "User");
         }

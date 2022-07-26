@@ -16,6 +16,7 @@ namespace IstanbulUni.WebUI.Controllers
         WebMasterManager manager = new WebMasterManager(new EfWebMasterDl());
 
         // GET: WebMaster
+        [Authorize]
         public ActionResult Index()
         {
             return View();
@@ -27,23 +28,22 @@ namespace IstanbulUni.WebUI.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditingInline_Create([DataSourceRequest] DataSourceRequest request, WebMaster webMaster)
         {
-           
-            if (webMaster != null && ModelState.IsValid)
+            if (webMaster != null)
             {
                 manager.AddWebMaster(webMaster);
             }
 
-            return Json(new[] { webMaster }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
+            return Json(new[] { webMaster }.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditingInline_Update([DataSourceRequest] DataSourceRequest request, WebMaster webMaster)
         {
-            if (webMaster != null && ModelState.IsValid)
+            if (webMaster != null)
             {
                 manager.UpdateWebMaster(webMaster);
             }
 
-            return Json(new[] { webMaster }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
+            return Json(new[] { webMaster }.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditingInline_Destroy([DataSourceRequest] DataSourceRequest request, WebMaster webMaster)
@@ -53,7 +53,7 @@ namespace IstanbulUni.WebUI.Controllers
                 manager.RemoveWebMaster(webMaster);
             }
 
-            return Json(new[] { webMaster }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
+            return Json(new[] { webMaster }.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
     }
 }

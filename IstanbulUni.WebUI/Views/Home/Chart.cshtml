@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+
+@model IEnumerable<IstanbulUni.DAL.Model.WebMaster>
+@using System.Collections;
+@{
+    ArrayList alyear1 = new ArrayList();
+    ArrayList alprod1 = new ArrayList();
+
+
+    foreach (var x in Model)
+    {
+
+        alyear1.Add(Convert.ToString(x.createTime.DayOfWeek));
+        alprod1.Add(Convert.ToString(x.createTime.Day));
+
+    }
+
+    Html.Kendo().Chart()
+        .Name("mychart")
+        .Title("Domain Eklenme Tarihi")
+        .Legend(legend => legend
+            .Position(ChartLegendPosition.Bottom))
+             .Series(series =>
+             {
+
+                 series.Line(alprod1).Name("Domain");
+                 
+
+             })
+             .ChartArea(area => area
+        .Background("")
+        .Height(450)
+
+    )
+
+        .CategoryAxis(axis => axis
+            .Categories(alyear1)
+
+       )
+        .Render();
+
+
+}

@@ -44,7 +44,7 @@ namespace IstanbulUni.BAL.Concrate
                 entity.Number = webMaster.Number;
                 entity.Department = webMaster.Department;
                 entity.DomainName = webMaster.DomainName;
-               
+                entity.createTime = webMaster.createTime;
                 _webMaster.Insert(entity);
             }
 
@@ -70,6 +70,7 @@ namespace IstanbulUni.BAL.Concrate
                     target.Department = webMaster.Department;
                     target.DomainName = webMaster.DomainName;
                     target.Number = webMaster.Number;
+                    target.createTime = webMaster.createTime;
                   
                     _webMaster.Update(target);
                 }
@@ -83,7 +84,7 @@ namespace IstanbulUni.BAL.Concrate
                 entity.Department = webMaster.Department;
                 entity.DomainName = webMaster.DomainName;
                 entity.Number = webMaster.Number;
-              
+                entity.createTime = webMaster.createTime;
                 _webMaster.Update(webMaster);
             }
         }

@@ -19,5 +19,6 @@ namespace IstanbulUni.DAL.Model
         public string Email { get; set; }
         public int  Number { get; set; }
         public string Department { get; set; }
+        public DateTime createTime { get; set; }=DateTime.Now;
     }
 }

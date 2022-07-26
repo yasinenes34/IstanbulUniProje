@@ -29,7 +29,7 @@ namespace IstanbulUni.BAL.Concrate
             {
                 return true;
             }
-            else { _user.Insert(user); return false; }
+            else { user.lastActivity = DateTime.Now; _user.Insert(user); return false; }
         }
         public IEnumerable<User> Read()
         {

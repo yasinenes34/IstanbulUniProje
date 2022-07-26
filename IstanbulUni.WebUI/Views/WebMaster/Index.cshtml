@@ -14,17 +14,20 @@
 <script src="~/Scripts/kendo/2021.2.616/kendo.all.min.js"></script>
 <script src="~/Scripts/kendo/2021.2.616/kendo.aspnetmvc.min.js"></script>
 <h1 class="text-center">Web Master İşlemleri</h1>
-@(Html.Kendo().Grid<IstanbulUni.DAL.Model.WebMaster>()
+@(Html.Kendo().Grid<IstanbulUni.DAL.Model.WebMaster>
+    ()
     .Name("grid")
     .Columns(columns =>
     {
-        columns.Bound(p => p.DomainName);
-        columns.Bound(p => p.Name);
-        columns.Bound(p => p.Surname);
-        columns.Bound(p => p.Email);
-        columns.Bound(p => p.Department);
-        columns.Bound(p => p.Number);
-        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+    columns.Bound(p => p.DomainName);
+    columns.Bound(p => p.Name);
+    columns.Bound(p => p.Surname);
+    columns.Bound(p => p.Email);
+    columns.Bound(p => p.Department);
+    columns.Bound(p => p.Number);
+    columns.Bound(c => c.createTime).ClientTemplate("#= kendo.toString(kendo.parseDate(createTime), 'dd/MM/yyyy') #");
+
+    columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
     })
     .ToolBar(toolbar => toolbar.Create())
     .Editable(editable => editable.Mode(GridEditMode.InLine).ConfirmDelete("Bu Kayıtı Silmek İstediğinizden Emin misiniz?").DisplayDeleteConfirmation("Bu Kayıtı Silmek İstediğinizden Emin misiniz?"))
@@ -33,29 +36,30 @@
     .Scrollable()
     .HtmlAttributes(new { style = "height:550px;" })
     .DataSource(dataSource => dataSource
-        .Ajax()
-        .PageSize(20)
-        .Events(events => events.Error("error_handler"))
-        .Model(model => model.Id(p => p.ID))
-        .Create(update => update.Action("EditingInline_Create", "WebMaster"))
-        .Read(read => read.Action("EditingInline_Read", "WebMaster"))
-        .Update(update => update.Action("EditingInline_Update", "WebMaster"))
-        .Destroy(update => update.Action("EditingInline_Destroy", "WebMaster"))
+    .Ajax()
+    .PageSize(20)
+    .Events(events => events.Error("error_handler"))
+    .Model(model => model.Id(p => p.ID))
+    .Create(update => update.Action("EditingInline_Create", "WebMaster"))
+    .Read(read => read.Action("EditingInline_Read", "WebMaster"))
+    .Update(update => update.Action("EditingInline_Update", "WebMaster"))
+    .Destroy(update => update.Action("EditingInline_Destroy", "WebMaster"))
     )
-)
-<script type="text/javascript">
-    function error_handler(e) {
-        if (e.errors) {
-            var message = "Errors:\n";
-            $.each(e.errors, function (key, value) {
-                if ('errors' in value) {
-                    $.each(value.errors, function () {
-                        message += this + "\n";
-                    });
-                }
-            });
-            alert(message);
+    )
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        debugger;
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
         }
-    }
-</script>
+    </script>
 

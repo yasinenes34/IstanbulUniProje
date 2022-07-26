@@ -37,6 +37,7 @@ namespace IstanbulUni.DAL.Repositories
 
         public void Insert(T d)
         {
+            
             var insertEntity = db.Entry(d);
             insertEntity.State = EntityState.Added;
             db.SaveChanges();
