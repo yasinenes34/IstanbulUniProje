@@ -19,14 +19,12 @@
     .Name("grid")
     .Columns(columns =>
     {
-    columns.Bound(p => p.DomainName);
-    columns.Bound(p => p.Name);
-    columns.Bound(p => p.Surname);
-    columns.Bound(p => p.Email);
-    columns.Bound(p => p.Department);
-    columns.Bound(p => p.Number);
-    columns.Bound(c => c.createTime).ClientTemplate("#= kendo.toString(kendo.parseDate(createTime), 'dd/MM/yyyy') #");
-
+    columns.Bound(p => p.DomainName).Title("Domain Adı").Sortable(true);
+    columns.Bound(p => p.Name).Title("İsim").Sortable(true);
+    columns.Bound(p => p.Surname).Title("Soy İsim").Sortable(true);
+    columns.Bound(p => p.Email).Title("E-posta").Sortable(true);
+    columns.Bound(p => p.Department).Title("Birimi").Sortable(true);
+    columns.Bound(p => p.Number).Title("Numarası").Sortable(true);
     columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
     })
     .ToolBar(toolbar => toolbar.Create())
