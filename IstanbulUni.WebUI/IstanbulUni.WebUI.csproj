@@ -140,9 +140,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WebMasterController.cs" />
+    <Compile Include="Controllers\WebMasterLogController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ResponseMessage.cs" />
+    <Compile Include="Models\WebMasterHistoryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -922,6 +925,9 @@
     <Content Include="Content\Main\jquery\jquery.min.js" />
     <Content Include="Content\Main\jquery\jquery.slim.js" />
     <Content Include="Content\Main\jquery\jquery.slim.min.js" />
+    <Content Include="Content\Main\Logo\altin_yaldiz_logo_tr_eng-07_637001852583712369.png" />
+    <Content Include="Content\Main\Logo\logo_tr_eng-a4-40.png" />
+    <Content Include="Content\Main\Logo\logo_zemin-05.png" />
     <Content Include="Content\Main\overlayScrollbars\css\OverlayScrollbars.css" />
     <Content Include="Content\Main\overlayScrollbars\css\OverlayScrollbars.min.css" />
     <Content Include="Content\Main\overlayScrollbars\js\jquery.overlayScrollbars.js" />
@@ -3784,10 +3790,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Chart.cshtml" />
     <Content Include="Views\Erorr\Index.cshtml" />
+    <Content Include="Views\WebMaster\Deneme.cshtml" />
+    <Content Include="Views\Home\ToplamChart.cshtml" />
+    <Content Include="Views\WebMasterLog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

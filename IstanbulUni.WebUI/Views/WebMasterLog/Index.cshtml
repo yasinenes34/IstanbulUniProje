@@ -1,9 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "Web Master";
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <link href="~/Content/kendo/2021.2.616/kendo.common.min.css" rel="stylesheet" />
 
 <link href="~/Content/kendo/2021.2.616/kendo.default.min.css" rel="stylesheet" />
@@ -13,8 +12,9 @@
 
 <script src="~/Scripts/kendo/2021.2.616/kendo.all.min.js"></script>
 <script src="~/Scripts/kendo/2021.2.616/kendo.aspnetmvc.min.js"></script>
-<h1 class="text-center">Web Master İşlemleri</h1>
-@(Html.Kendo().Grid<IstanbulUni.DAL.Model.WebMaster>
+<h1 class="text-center">Web Master Geçmişi</h1>
+@model IEnumerable<IstanbulUni.DAL.Model.WebMasterHistory>
+@(Html.Kendo().Grid<IstanbulUni.DAL.Model.WebMasterHistory>
     ()
     .Name("grid")
     .Columns(columns =>
@@ -25,7 +25,7 @@
         columns.Bound(p => p.Email).Title("E-posta").Sortable(true);
         columns.Bound(p => p.Department).Title("Birimi").Sortable(true);
         columns.Bound(p => p.Phone).Title("Numarası").Sortable(true);
-        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+        columns.Bound(p => p.serviceTime).Title("Görev Süresi").Sortable(true);
     })
     .Filterable()
       .ToolBar(t => t.Search().Text("Arama"))
@@ -36,15 +36,7 @@
          s.Field("Surname");
          s.Field("Email");
          s.Field("Department");
-         //s.Field("Number");
-         //s.Field(o => o.Name);
-         //s.Field(o => o.Surname);
-         //s.Field(o => o.Email);
-         //s.Field(o => o.Department);
-         //s.Field(o => o.Number);
      })
-    .ToolBar(toolbar => toolbar.Create())
-    .Editable(editable => editable.Mode(GridEditMode.InLine).ConfirmDelete("Bu Kayıtı Silmek İstediğinizden Emin misiniz?").DisplayDeleteConfirmation("Bu Kayıtı Silmek İstediğinizden Emin misiniz?"))
     .Pageable()
     .Sortable()
     .Scrollable()
@@ -53,14 +45,40 @@
     .Ajax()
     .PageSize(8)
     .Events(events => events.Error("error_handler"))
-    .Model(model => model.Id(p => p.webMasterID))
-    .Create(update => update.Action("EditingInline_Create", "WebMaster"))
-    .Read(read => read.Action("EditingInline_Read", "WebMaster"))
-    .Update(update => update.Action("EditingInline_Update", "WebMaster"))
-    .Destroy(update => update.Action("EditingInline_Destroy", "WebMaster"))
+    .Model(model => model.Id(p => p.webMasterHistoryID))
+    .Read(read => read.Action("EditingInline_Read", "WebMasterLog"))
     )
     )
+@(Html.Kendo().Window().Name("Details")
+    .Title("Web Master Detay")
+    .Visible(false)
+    .Modal(true)
+    .Draggable(true)
+    .Width(500)
+)
+@{
 
+
+
+
+<style type="text/css">
+    #details-container {
+        padding: 10px;
+    }
+
+        #details-container h2 {
+            margin: 0;
+        }
+
+        #details-container em {
+            color: #8c8c8c;
+        }
+
+        #details-container dt {
+            margin: 0;
+            display: inline;
+        }
+</style>
 <style>
     .k-grid .k-grid-search {
         display: flex;

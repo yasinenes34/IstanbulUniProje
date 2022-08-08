@@ -7,13 +7,13 @@ namespace IstanbulUni.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class lastactivitycreatr : IMigrationMetadata
+    public sealed partial class bb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(lastactivitycreatr));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(bb));
         
         string IMigrationMetadata.Id
         {
-            get { return "202207250703362_lastactivity-creatr"; }
+            get { return "202208041126115_bb"; }
         }
         
         string IMigrationMetadata.Source

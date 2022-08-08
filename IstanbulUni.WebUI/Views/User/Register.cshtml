@@ -5,11 +5,17 @@
 }
 <link href="~/Content/toastr.css" rel="stylesheet" />
 <link href="~/Content/toastr.min.css" rel="stylesheet" />
+
+
+
+
 <div class="card">
     <div class="card-body register-card-body">
-        <p class="login-box-msg">Kayıt olma sayfasına hoş geldiniz</p>
+        <p class="login-box-msg">Kayıt olmak için lütfen aşağıdaki alanları doldurunuz.</p>
+
 
         <form id="ticketsForm">
+
             <div class="input-group mb-3">
                 <input type="text" class="form-control" id="name" required placeholder="Adınız">
                 <div class="input-group-append">
@@ -19,7 +25,7 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" id="surname" required placeholder="Soy Adınız">
+                <input type="text" class="form-control" id="surname" required placeholder="Soyadınız">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-user"></span>
@@ -34,7 +40,7 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                <input type="email" class="form-control" required placeholder="Email" id="Email">
+                <input type="email" class="form-control" required placeholder="E-Posta adresiniz" id="Email">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-envelope"></span>
@@ -42,7 +48,7 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                <input type="password" class="form-control" required placeholder="Password" id="password">
+                <input type="password" class="form-control" required placeholder="Şifreniz" id="password">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -50,7 +56,7 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                <input type="password" class="form-control" required placeholder="Retype password" id="repassword">
+                <input type="password" class="form-control" required placeholder="Şifrenizi tekrar yazınız" id="repassword">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -60,7 +66,7 @@
             <div class="row">
                 <!-- /.col -->
                 <div class="col-12">
-                    <a id="register" class="btn btn-primary btn-block">Register</a>
+                    <a id="register" class="btn btn-primary btn-block">Kayıt Ol</a>
                 </div>
                 <!-- /.col -->
             </div>
@@ -129,3 +135,11 @@
 
 
 </script>
+<style>
+    .bg-login-image {
+        
+        background-position: center;
+        background-size: cover
+    }
+
+</style>

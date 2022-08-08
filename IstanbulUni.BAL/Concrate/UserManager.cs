@@ -12,6 +12,7 @@ namespace IstanbulUni.BAL.Concrate
     public class UserManager : IUserService
     {
         IUser _user;
+        public int userID;
         public UserManager(IUser user)
         {
             _user = user;
@@ -46,9 +47,13 @@ namespace IstanbulUni.BAL.Concrate
                 _user.Update(userInfo);
                 return true;
             }
-                
             else return false;
 
+        }
+        public int getUserId(User user)
+        {
+            User userInfo = _user.get(t => t.Email == user.Email && t.Password == user.Password);
+            return userInfo.userID;
         }
 
         public List<User> getByLast(DateTime last)
@@ -56,5 +61,42 @@ namespace IstanbulUni.BAL.Concrate
             var data = _user.List(l => l.lastActivity > last);
             return data;
         }
+
+        public User getUserInfo(int id)
+        {
+            return _user.get(x=>x.userID == id);
+        }
+
+        public bool getUserMail(string email)
+        {
+            var mail = _user.get(x => x.Email == email);
+            if (mail != null)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        public bool getUserPass(string passwod)
+        {
+            var pass =  _user.get(x => x.Password == passwod);
+            if (pass!=null)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        //public User userLoginInfo(User user)
+        //{
+        //    User userInfo = _user.get(t => t.Email == user.Email || t.Password == user.Password);
+        //    if (userInfo!=null)
+        //    {
+        //        userInfo.lastActivity = DateTime.Now;
+        //        _user.Update(userInfo);
+        //    }
+
+        //    return userInfo;
+        //}
     }
 }

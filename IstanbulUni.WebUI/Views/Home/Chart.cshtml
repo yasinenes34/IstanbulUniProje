@@ -3,56 +3,35 @@
     ViewBag.Title = "Index";
     Layout = null;
 }
-
-
 @model IEnumerable<IstanbulUni.DAL.Model.WebMaster>
-@using System.Collections;
 @{
-    ArrayList alyear1 = new ArrayList();
-    ArrayList alprod1 = new ArrayList();
+    //lambda query (linq)
+    //var deneme=(from a in Model join a2 in Model on a.ID equals a2.ID select a.ID ).ToList();
+    //
 
-    foreach (var x in Model)
-    {
-        alprod1.Add(Convert.ToString(x.createTime.Day));
-    }
-    for (int i = 0; i < Model.LongCount(); i++)
-    {
-        for (int j = 0; j < Model.LongCount(); j++)
-        {
-            if (alprod1[i] == alprod1[j])
-            {
-                alyear1.Add(i);
-            }
-        }
+    //lambda expression
+    var sayactotalbydate = Model.GroupBy(x => x.createTime.ToShortDateString()).Select(a=>new {sayacyear= a.Count(),sayacgrtime=a.Key }).OrderBy(x=>x.sayacgrtime).ToList();
+    //
 
-
-    }
-
+    var sayacYear = sayactotalbydate.Select(a => a.sayacyear).ToList();
+    var sayacCategories= sayactotalbydate.Select(a => a.sayacgrtime).ToList();
 
     Html.Kendo().Chart()
-        .Name("mychart")
-        .Title("Domain Eklenme Tarihi")
-        .Legend(legend => legend
-            .Position(ChartLegendPosition.Bottom))
-             .Series(series =>
-             {
-
-
-                 series.Line(alyear1).Name("Domain");
-
-
-             })
-             .ChartArea(area => area
-        .Background("")
-        .Height(450)
-
-    )
-
-        .CategoryAxis(axis => axis
-            .Categories(alprod1)
-
-       )
-        .Render();
-
-
+.Name("mychart")
+.Title("Eklenen Domain Sayısı")
+.Legend(legend => legend
+.Position(ChartLegendPosition.Bottom))
+.Series(series =>
+{
+    series.Line(sayacYear).Name("Domain");
+})
+.ChartArea(area => area
+.Background("")
+.Height(450)
+)
+.SeriesColors("#13263d")
+.CategoryAxis(axis => axis
+.Categories(sayacCategories)
+)
+.Render();
 }

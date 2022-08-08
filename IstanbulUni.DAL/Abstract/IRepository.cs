@@ -10,6 +10,7 @@ namespace IstanbulUni.DAL.Abstract
     public interface IRepository<T>
     {
         List<T> GetAll();
+        IQueryable<T> GetAllAsQueryble();
         void Insert(T d);
         void Delete(T d);
         void Update(T d);

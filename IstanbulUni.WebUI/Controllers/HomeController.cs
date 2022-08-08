@@ -10,21 +10,24 @@ namespace IstanbulUni.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-       
-        UserManager um = new UserManager(new EfUserDl());
+      
         WebMasterManager manager = new WebMasterManager(new EfWebMasterDl());
         [Authorize]
         public ActionResult Index()
         
         {
-            DateTime time = DateTime.Today;
-            var userData = um.getByLast(time);
-            return View(userData);
+            var webMasterData = manager.GetAll().Take(5) ;
+
+            return View(webMasterData);
         }
         public ActionResult Chart()
         {
             
-            return View(manager.GetAll());
+            return View(manager.ChartData());
+        }
+        public ActionResult ToplamChart()
+        {
+            return View(manager.ChartData());
         }
         
     }

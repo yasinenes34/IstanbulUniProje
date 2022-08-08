@@ -18,15 +18,24 @@
     <!-- Theme style -->
     <link href="~/Content/Main/dist/css/adminlte.css" rel="stylesheet" />
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-color: #13263d !important" >
     <div class="login-box">
-        <div class="login-logo">
-            <a><b>Sisteme </b>Hoş Geldiniz</a>
+
+        <div class="row">
+            <div class="col-lg-12 bg-login-image">
+                <img src="~/Content/Main/Logo/logo_zemin-05.png" class="img-fluid" />
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="login-logo col-lg-12">
+
+            <p>Web Master Envanteri</p>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-              @RenderBody()
+                @RenderBody()
             </div>
             <!-- /.login-card-body -->
         </div>
@@ -40,3 +49,12 @@
     <script src="~/Content/Main/dist/js/adminlte.min.js"></script>
 </body>
 </html>
+<style>
+    body {
+        background-color: #13263d !important;
+        color:white;
+    }
+    .card {
+        background-color: #13263d !important;
+    }
+</style>

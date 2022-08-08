@@ -3,16 +3,16 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class lastactivitycreatr : DbMigration
+    public partial class bb : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Users", "lastActivity", c => c.DateTime(nullable: false));
+            AddColumn("dbo.WebMasters", "IsActive", c => c.Boolean(nullable: false));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Users", "lastActivity");
+            DropColumn("dbo.WebMasters", "IsActive");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿@{
-  
+
     Layout = null;
+    ViewBag.Title = "İstanbul Üniversitesi Cerrahpaşa Web Master Envanteri";
 }
 
 
@@ -38,9 +39,10 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="../../index3.html" class="brand-link">
-                <img src="~/Content/Main/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Yöntim</span>
+            <a href="~/Home/Index" class="brand-link">
+                <img src="~/Content/Main/Logo/logo_tr_eng-a4-40.png" alt="İstanbul Üniversitesi Cerrahpaşa Web Master Envanteri" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">Web Master Envanteri </span>
+
             </a>
 
             <!-- Sidebar -->
@@ -48,7 +50,7 @@
                 <!-- SidebarSearch Form -->
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Arama" aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-sidebar">
                                 <i class="fas fa-search fa-fw"></i>
@@ -61,27 +63,36 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="~/Home/Index" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fas fa-home"></i>
                                 <p>
                                     Ana Sayfa
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="~/WebMaster/Index" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
+                            <a href="~/WebMaster/Index/" class="nav-link">
+                                <i class="nav-icon fas fa-user-edit"></i>
                                 <p>
-                                    Web Master
+                                    Web Master <span>Ekle/Listele</span>
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/WebMasterLog/Index/" class="nav-link">
+                                <i class="nav-icon fas fa-user-edit"></i>
+                                <p>
+                                    Web Master <span>Geçmişi</span>
                                 </p>
                             </a>
 
                         </li>
                         <li class="nav-item">
                             <a href="~/User/Logout" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
+                                <i class="nav-icon fas fa-window-close"></i>
                                 <p>
                                     Çıkış Yap
                                 </p>
@@ -117,7 +128,7 @@
         <!-- /.content-wrapper -->
 
         <footer class="main-footer">
-            <p> &copy; @DateTime.Now.Year - İstanbul Üniversitesi </p>
+            <p> &copy; @DateTime.Now.Year - İstanbul Üniversitesi - Cerrahpaşa Bilgi İşlem Daire Başkanlığı </p>
         </footer>
 
         <!-- Control Sidebar -->

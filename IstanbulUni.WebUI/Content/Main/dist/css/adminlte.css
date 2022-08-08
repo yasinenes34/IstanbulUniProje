@@ -1,6 +1,6 @@
 /*!
  *   AdminLTE v3.2.0
- *   Author: Colorlib
+ *   Author: rlib
  *   Website: AdminLTE.io <https://adminlte.io>
  *   License: Open source - MIT <https://opensource.org/licenses/MIT>
  */
@@ -34971,16 +34971,16 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 
 .login-page,
 .register-page {
-  -ms-flex-align: center;
-  align-items: center;
-  background-color: #e9ecef;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 100vh;
-  -ms-flex-pack: center;
-  justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: red !important;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 100vh;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 .login-box,

@@ -13,5 +13,8 @@ namespace IstanbulUni.BAL.Abstract
         bool UserAddBl(User user);
         bool UserLogin(User user);
         List<User> getByLast(DateTime last);
+        User getUserInfo(int id);
+        bool getUserMail(string email);
+        bool getUserPass(string passwod);
     }
 }

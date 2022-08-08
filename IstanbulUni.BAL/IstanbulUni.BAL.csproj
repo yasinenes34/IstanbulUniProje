@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,9 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IUserService.cs" />
+    <Compile Include="Abstract\IWebMasterHistoryService.cs" />
     <Compile Include="Abstract\IWebMasterService.cs" />
     <Compile Include="Concrate\UserManager.cs" />
+    <Compile Include="Concrate\WebMasterHistoryManager.cs" />
     <Compile Include="Concrate\WebMasterManager.cs" />
+    <Compile Include="Model\WebMasterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -20,9 +20,7 @@ namespace IstanbulUni.WebUI
         }
         protected void Application_BeginRequest()
         {
-            CultureInfo info = new CultureInfo(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
-            info.DateTimeFormat.ShortDatePattern = "dd.MM.yyyy";
-            System.Threading.Thread.CurrentThread.CurrentCulture = info;
+          
         }
     }
 }

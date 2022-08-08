@@ -32,7 +32,13 @@ namespace IstanbulUni.DAL.Repositories
 
         public List<T> GetAll()
         {
+
             return obj.ToList();
+        }
+
+        public IQueryable<T> GetAllAsQueryble()
+        {
+            return obj.AsQueryable<T>();
         }
 
         public void Insert(T d)

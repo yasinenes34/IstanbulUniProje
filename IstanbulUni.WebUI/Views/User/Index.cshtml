@@ -17,12 +17,12 @@
 <link href="~/Content/toastr.min.css" rel="stylesheet" />
 <div class="card">
     <div class="card-body login-card-body">
-        <p class="login-box-msg">Giriş Yapınız</p>
+        <p class="login-box-msg">Lütfen E-Posta adresinizi ve şifrenizi giriniz.</p>
 
         <form>
 
             <div class="input-group mb-3">
-                <input type="email" class="form-control" placeholder="Email" id="Email">
+                <input type="email" class="form-control" placeholder="E-Posta adresiniz" id="Email">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-envelope"></span>
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Password" id="Password">
+                <input type="password" class="form-control" placeholder="Şifreniz" id="Password">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -47,7 +47,7 @@
             </div>
         </form>
         <p class="mb-0">
-            <a href="~/User/Register" class="text-center">Üyeliğiniz yok mu hemen üye olun</a>
+            <a href="~/User/Register" class="text-center">Üyeliğiniz yok mu? Hemen üye olun.</a>
         </p>
     </div>
     <!-- /.login-card-body -->
@@ -57,8 +57,8 @@
 <script src="~/Scripts/toastr.js"></script>
 <script src="~/Scripts/toastr.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        var validator = $("#ticketsForm").kendoValidator().data("kendoValidator");
+    var validator = $("#ticketsForm").kendoValidator().data("kendoValidator");
+
         $("#login").click(function () {
 
             var data = new Object();
@@ -67,27 +67,29 @@
             debugger
             $.ajax({
                 type: "POST",
-                url: '/User/Index',
+                url: '/User/GetInfoUser',
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-
-                    if (data) {
-                        toastr.success("Lütfen Bekleyin Yönlendiriliyorsunuz..", "Giriş İşlemi Başarılı", { timeOut: 3000 })
+                    debugger;
+                    if (data.IsTrue) {
+                        toastr.success(data.Message, "Giriş İşlemi Başarılı", { timeOut: 5000 })
                         window.location.href = "/Home/Index";
                     }
                     else {
-                        toastr.error("Lütfen Bilgilerinizi Kontrol Ediniz...", "Başarısız", { timeOut: 3000 })
+                        debugger
+
+                        toastr.error(data.Message, 'Başarısız İşlem', { timeOut: 3000 })
 
                     }
                 },
                 error: function Error() {
-                    toastr.warning("Beklenmedik Bir Hata Meydana Geldi", "Hata", { timeOut: 3000 })
+                    debugger;
+                     
+                    toastr.warning(data.Message, "Hata", { timeOut: 3000 })
                 }
             });
         });
-    });
-
 
 </script>

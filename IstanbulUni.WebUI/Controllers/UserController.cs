@@ -1,6 +1,7 @@
 ﻿using IstanbulUni.BAL.Concrate;
 using IstanbulUni.DAL.EntityFramewrok;
 using IstanbulUni.DAL.Model;
+using IstanbulUni.WebUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,24 +20,37 @@ namespace IstanbulUni.WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult Index(User user)
+        public ActionResult GetInfoUser(User user)
         {
-            var userInfo = um.UserLogin(user);
+            ResponseMessage res = new ResponseMessage();
 
 
-            if (userInfo)
+            var userEmail = um.getUserMail(user.Email);
+            var userPass = um.getUserPass(user.Password);
+            if (userEmail)
             {
-                FormsAuthentication.SetAuthCookie(user.Email, false);
-                Session["Email"] = user.Email;
-
-
-                return Json(true, JsonRequestBehavior.AllowGet);
+                if (userPass)
+                {
+                    res.IsTrue = true;
+                    res.Message = "Bilgileriniz Doğru Yönlendiriliyorsunuz Lütfen Bekleyin";
+                    FormsAuthentication.SetAuthCookie(user.userID.ToString(), false);//Arasındaki farkları araştır..
+                    Session["ID"] = um.getUserId(user);//Arasındaki farkları araştır..
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    res.IsTrue = false;
+                    res.Message = "Şifreniz Hatalı Lütfen Kontrol Ediniz...";
+                  
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
             }
             else
             {
-                // ViewBag.durum = 0;
-
-                return Json(false, JsonRequestBehavior.AllowGet);
+                res.IsTrue = false;
+                res.Message = "Sistemde Kayıtlı Böyle Bir E-posta Adresi Bulunamadı Lütfen Bilgilerinizi Kontrol Ediniz";
+               
+                return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -71,15 +85,7 @@ namespace IstanbulUni.WebUI.Controllers
                 return Json(true, JsonRequestBehavior.AllowGet);
 
             }
-
-
-
         }
-
-
-
         #endregion
-
-
     }
 }

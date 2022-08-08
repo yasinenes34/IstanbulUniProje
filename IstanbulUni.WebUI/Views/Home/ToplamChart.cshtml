@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+
+
+@model IEnumerable<IstanbulUni.DAL.Model.WebMaster>
+@{
+    var month = new Dictionary<int, string> { { 1,"Ocak"},{2,"Şubat"}, { 3, "Mart" }, { 4, "Nisan" }, { 5, "Mayıs" }, { 6, "Haziran" }, { 7, "Temmuz" }, { 8, "Ağustos" }, { 9, "Eylül" }, { 10, "Ekim" }, { 11, "Kasım" }, { 12, "Aralık" } };
+    var sayactotalbydate = Model.GroupBy(x => x.createTime.Month).Select(a => new { sayacyear = a.Count(), sayacgrtime = a.Key }).OrderBy(x => x.sayacyear).ToList();
+    //
+    var sayacCategories = sayactotalbydate.Select(a => a.sayacgrtime).ToList();
+    var sayacYear = sayactotalbydate.Select(a => a.sayacyear).ToList();
+
+    List<string> MonthStrValue = new List<string>();
+    foreach (var item in sayacCategories)
+    {
+        var sayacYear1 = month.FirstOrDefault(a =>a.Key==item);
+
+        if (sayacYear1.Key > 0)
+        {
+            MonthStrValue.Add(sayacYear1.Value);
+        }
+    }
+
+    }
+
+
+<div>
+    @(Html.Kendo().Chart()
+                .Name("chart")
+
+                .Title("Toplam Web Master Sayısı (Ay Bazlı)")
+                .Legend(legend => legend
+                    .Position(ChartLegendPosition.Top)
+                )
+                .ChartArea(chartArea => chartArea
+                    .Background("transparent")
+                )
+                .Series(series => {
+                        series.Column(sayacYear).Name("Sistemde Bulunan Domain Sayısı").Color("#13263d");
+                })
+                .ChartArea(area => area
+                .Background("white")
+                
+                .Height(350)
+                )
+
+        .CategoryAxis(axis => axis
+            .Name("series-axis")
+            .Line(line => line.Visible(false))
+            
+        )
+        .CategoryAxis(axis => axis
+            .Name("label-axis")
+
+            .Categories(MonthStrValue)
+        )
+        .ValueAxis(axis => axis
+            .Numeric()
+                .Labels(labels => labels.Format("{0}"))
+
+                // Move the label-axis all the way down the value axis
+                .AxisCrossingValue(0, int.MinValue)
+
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0}%")
+            .Template("#= series.name #: #= value #")
+            .Color("white")
+        )
+
+
+    )
+</div>
+

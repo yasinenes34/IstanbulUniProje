@@ -13,7 +13,7 @@ namespace IstanbulUni.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202207250719555_aa"; }
+            get { return "202208041104424_aa"; }
         }
         
         string IMigrationMetadata.Source
